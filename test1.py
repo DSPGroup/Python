@@ -1,4 +1,4 @@
-execfile(r"C:\new_python_infrastructure\init.py")
+execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 
 
 

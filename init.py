@@ -11,9 +11,9 @@
 #######################################################################################
 ### home-made modules:
 ######################
-execfile(r"C:\new_python_infrastructure\devices.py")
-execfile(r"C:\new_python_infrastructure\utilities.py")
-execfile(r"C:\new_python_infrastructure\lab_equipment.py")
+execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\devices.py")
+execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\utilities.py")
+execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\lab_equipment.py")
 
 
 #######################################################################################
@@ -36,7 +36,7 @@ import psutil
 import visa         # for controlling GPIB devices. (this module takes long time to load, so load it only if necessary)
 #import openpyxl     # Excel library.  (this module takes long time to load, so load it only if necessary)
 import decimal
-
+import platform     #for the Laurebach initialization
 
 #Test1 path:
 FOLDER_PATH = r"C:\new_python_infrastructure\Tests\functionality_test"
