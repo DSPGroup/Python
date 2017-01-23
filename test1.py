@@ -6,7 +6,7 @@ execfile(r"C:\new_python_infrastructure\init.py")
 ## Uart_Device:
 
 # D6 = UartDevice('DBMD6', 'COM13', baudrate=912600, bytesize=8, parity='N', stopbits=1,timeout=1)
-# #D6.change_baudrate(115200)
+# D6.change_baudrate(115200)
 # print D6.ser.baudrate
 # D6.sync(10)
 # D6.load_boot_file(r'T:\Barkristal\VT_D6_ver_293_Sen333.bin')
