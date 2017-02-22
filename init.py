@@ -34,20 +34,21 @@ import enum         # module for C data types
 import subprocess   # module to create an additional process
 import psutil
 import visa         # for controlling GPIB devices. (this module takes long time to load, so load it only if necessary)
-#import openpyxl     # Excel library.  (this module takes long time to load, so load it only if necessary)
+import openpyxl     # Excel library.  (this module takes long time to load, so load it only if necessary)
 import decimal
 import platform     #for the Laurebach initialization
 
 #Test1 path:
-FOLDER_PATH = r"C:\new_python_infrastructure\Tests\functionality_test"
-FOLDER_NAME = "Log"
+
 FOLDER_DATE = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
 DIR_NAME = os.path.join(FOLDER_PATH , FOLDER_NAME , FOLDER_DATE)
-TEST_NAME = "test1"
+
 
 
 #########################################
-#####     Log
+##### Log:
+##### This section creates the log files for every test,
+##### when the test name and folder name are declared in the test itself.
 #########################################
 
 TEST_DATE = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
@@ -55,8 +56,7 @@ TEST_TIME = datetime.datetime.strftime(datetime.datetime.now(), '%H-%M-%S')
 LOG_NAME = TEST_NAME + r"_" + TEST_DATE + r"_" + TEST_TIME + r".txt"
 LOG_NAME_EXCEL = TEST_NAME + r"_" + TEST_DATE + r"_" + TEST_TIME + r".xlsx" 
 
-
-#open a new log
+#open a new log:
 open_log(DIR_NAME, LOG_NAME)
 ############################################################################################
 
