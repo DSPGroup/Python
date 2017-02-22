@@ -1,0 +1,37 @@
+d.s 0x00ce0000 %LONG 0x6
+
+wait 1.5s 
+
+
+d.s 0x00ce000c %LONG 0xff                 //enable all interrupts
+PER.Set.Field A:00ce0004 %Long 0x8000 0x1   //rx_thr >24
+PER.Set.Field A:00ce0004 %Long 0x7f 0x8   //set RATE
+d.s 0x00ce0008 %LONG 0x6   	       //set FRAME to 6
+PER.Set.Field A:00ce0004 %Long 0x100 0 //set to mode 0
+PER.Set.Field A:00ce0004 %Long 0x80 1	//set as master
+
+PER.Set.Field A:00cf0114 %Long 0x1 0  //CS down
+
+d.s 0x00ce0014 %LONG 0x9f
+d.s 0x00ce0014 %LONG 0x00
+d.s 0x00ce0014 %LONG 0x00
+d.s 0x00ce0014 %LONG 0x00
+d.s 0x00ce0014 %LONG 0x00
+d.s 0x00ce0014 %LONG 0x00
+
+PER.Set.Field A:00cf0114 %Long 0x1 1  //CS up
+
+
+;wait 1s
+
+;repeat 6.
+;(
+;	print data.word(A:0x00ce0014)
+;	wait 0.2s
+;)
+enddo
+
+
+
+
+

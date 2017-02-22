@@ -1,0 +1,10 @@
+dcx81_spi2_master_and_slave_2017-02-22_13-51-58.txt
+22/02/2017 13:52:00:303000	Sync failed
+22/02/2017 13:52:00:303000	Startover Sync function, loop number: 0
+22/02/2017 13:52:00:304000	Please restart DBMD6
+22/02/2017 13:52:01:605000	Sync failed
+22/02/2017 13:52:01:605000	Startover Sync function, loop number: 1
+22/02/2017 13:52:01:606000	Please restart DBMD6
+22/02/2017 13:52:02:006000	Synced!
+22/02/2017 13:52:07:434000	Error while connecting to debug interface, attampt number 1
+22/02/2017 13:52:12:436000	Error while connecting to debug interface, attampt number 2
