@@ -1,3 +1,11 @@
+
+################################################################
+## Test ID:
+FOLDER_PATH = r"C:\\Users\bar.kristal\Documents\GitHub\Python\Tests\functionality_test"
+FOLDER_NAME = "Log"
+TEST_NAME = "test1"
+#################################################################
+
 execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 
 
