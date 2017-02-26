@@ -99,10 +99,20 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Blue oven:
 
-termotron = Termotron3800(TERMOTRON_TCP_IP)
-termotron.stop_chamber()
-termotron.set_temp(23)
-termotron.wait_for_temp(29)
-print termotron.read_temp()
-time.sleep(3)
-termotron.stop_chamber()
+# termotron = Termotron3800(TERMOTRON_TCP_IP)
+# termotron.stop_chamber()
+# termotron.set_temp(23)
+# #termotron.wait_for_temp(29)
+# write_to_log(termotron.read_temp())
+# time.sleep(3)
+# termotron.stop_chamber()
+
+
+########################
+## DMM
+
+dmm = Agillent34401A(DMM_ADDRESS, RESOURCE_MANAGER)
+dmm.meas("DCV")
+dmm.meas("ACV")
+dmm.meas("frequency")
+dmm.close()
