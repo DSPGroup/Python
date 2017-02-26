@@ -1,14 +1,13 @@
 
 ################################################################
 ## Test ID:
-FOLDER_PATH = r"C:\\Users\bar.kristal\Documents\GitHub\Python\Tests\functionality_test"
+FOLDER_PATH = r"C:\GitHub\Python\functionality_test"
 FOLDER_NAME = "Log"
 TEST_NAME = "test1"
 
-T32_APP_CMM_PATH = r"T:\\barkristal\DVF101\SPI\scripts\dvf101_app.cmm"
 #################################################################
 
-execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
+execfile(r"C:\GitHub\Python\init.py")
 
 
 
@@ -99,10 +98,10 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Blue oven:
 
-termotron = Termotron3800(TERMOTRON_TCP_IP)
-termotron.stop_chamber()
-termotron.set_temp(23)
-termotron.wait_for_temp(29)
-print termotron.read_temp()
-time.sleep(3)
-termotron.stop_chamber()
+# termotron = Termotron3800(TERMOTRON_TCP_IP)
+# termotron.stop_chamber()
+# termotron.set_temp(23)
+# termotron.wait_for_temp(29)
+# print termotron.read_temp()
+# time.sleep(3)
+# termotron.stop_chamber()
