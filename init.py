@@ -11,9 +11,9 @@
 #######################################################################################
 ### home-made modules:
 ######################
-execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\devices.py")
-execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\utilities.py")
-execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\lab_equipment.py")
+execfile(r"C:\GitHub\Python\devices.py")
+execfile(r"C:\GitHub\Python\utilities.py")
+execfile(r"C:\GitHub\Python\lab_equipment.py")
 
 
 #######################################################################################
@@ -71,18 +71,18 @@ RESOURCE_MANAGER = visa.ResourceManager()
 ##### defines: 
 #############
 
-T32_APP_CMM_PATH = r"T:\\Barkristal\DVF101\SPI\scripts\dvf101_app.cmm"
-POWER_SUPPLY_FOR_RESET = ["GPIB0::29::INSTR", 2] #(addres, channel)
+T32_APP_CMM_PATH = r"C:\T32\DVF101\script_from_lautherbach_support.cmm"
+
 
 #lab_equipment GPIB addresses:
-POWER_SUPLLY_ADDRESS = "GPIB0::29::INSTR"
-DMM_ADDRESS = "GPIB0::22::INSTR"
+POWER_SUPLLY_ADDRESS = "GPIB0::2::INSTR"
+DMM_ADDRESS = "GPIB1::22::INSTR"
 FREQUENCY_COUNTER_ADDRESS = "GPIB0::27::INSTR"
 WAVE_GENERATOR_ADDRESS = "GPIB0::1::INSTR"
 ELECTRONIC_LOAD = "GPIB0::3::INSTR"
 
 #TCP_IP addresses:
-#TERMOTRON_TCP_IP =  ("172.19.5.237" ,8080)  # (ip, port) , (Sas)
-TERMOTRON_TCP_IP =  ("172.19.5.240" ,8080)  # (ip, port) , (Ronny)
+TERMOTRON_TCP_IP = ("172.19.5.237", 8080)  # (ip, port) , (Sas)
+#TERMOTRON_TCP_IP =  ("172.19.5.240", 8080)  # (ip, port) , (Ronny)
 #############################################################################################
 

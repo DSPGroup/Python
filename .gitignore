@@ -1,1 +1,3 @@
 Tests/DCX81/dcx81_spi_test_with_dbmd6.py
+*.txt
+*.xlsx
