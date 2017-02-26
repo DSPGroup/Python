@@ -93,7 +93,7 @@ class UartDevice():
         self.ser.write(chr(0x5A)+chr(0x07)+addr6+addr4+addr2+addr0)
         time.sleep(0.1)
         reg = self.ser.read(20)
-        reg.zfill(8)
+        reg = reg.zfill(8)
         # convert ascii to hex value
         apb_reg = binascii.hexlify(reg[5])+binascii.hexlify(reg[4])+binascii.hexlify(reg[3])+binascii.hexlify(reg[2])
         return apb_reg
@@ -324,6 +324,6 @@ class Lauterbach():
         if (self.t32api.T32_Cmd(command) != T32_OK):
             write_to_log("Error while executing {}".format(cmm_file))
         else:
-            write_to_log("{} exectuted successfully".format(cmm_file))
+            write_to_log("{} executed successfully".format(cmm_file))
   
     
