@@ -1,1 +1,5 @@
 Tests/DCX81/dcx81_spi_test_with_dbmd6.py
+*.txt
+*.bak
+Tests/DCX81/spi_read_fifo.cmm
+Tests/DCX81/spi2_slave.cmm

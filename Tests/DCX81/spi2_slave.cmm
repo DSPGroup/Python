@@ -5,19 +5,19 @@ wait 1s
 d.s 0x00ce000c %LONG 0xff                   //enable all interrupts
 PER.Set.Field A:00ce0004 %Long 0x8000 0x1   //rx_thr =24
 PER.Set.Field A:00ce0004 %Long 0x4000 0x1   //tx_thr =8
-PER.Set.Field A:00ce0004 %Long 0x7f 0x1     //set RATE
+PER.Set.Field A:00ce0004 %Long 0x7f 0x8     //set RATE
 PER.Set.Field A:00ce0004 %Long 0x1E00 0x7   //set BITNUM = 7(+1)
 PER.Set.Field A:00ce0004 %Long 0x100 0      //set to mode 0
 
 ;d.s 0x00ce0004 %LONG 0xce08
 
-d.s 0x00ce0008 %LONG 0x5  	            //set FRAME to 5
+d.s 0x00ce0008 %LONG 0x8  	            //set FRAME to 8
 
-d.s 0x00ce0014 %WORD 0x51 
-d.s 0x00ce0014 %WORD 0x41 
-d.s 0x00ce0014 %WORD 0x53 
-d.s 0x00ce0014 %WORD 0x53 
-d.s 0x00ce0014 %WORD 0x21 
+d.s 0x00ce0014 %WORD 0x61 
+d.s 0x00ce0014 %WORD 0x62 
+d.s 0x00ce0014 %WORD 0x63 
+d.s 0x00ce0014 %WORD 0x64 
+d.s 0x00ce0014 %WORD 0x65 
 
 
 ;wait 5s
@@ -28,6 +28,7 @@ d.s 0x00ce0014 %WORD 0x21
 ;	wait 0.5s
 ;)
 ;enddo
+
 
 
 
