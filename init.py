@@ -82,7 +82,8 @@ WAVE_GENERATOR_ADDRESS = "GPIB0::1::INSTR"
 ELECTRONIC_LOAD = "GPIB0::3::INSTR"
 
 #TCP_IP addresses:
-TERMOTRON_TCP_IP = ("172.19.5.237", 8080)  # (ip, port) , (Sas)
-#TERMOTRON_TCP_IP =  ("172.19.5.240", 8080)  # (ip, port) , (Ronny)
+#TERMOTRON_TCP_IP = ("172.19.5.237", 8080)  # (ip, port) , (Sas)
+#TERMOTRON_TCP_IP = ("172.19.5.239", 8080)  # (ip, port) , (Bisset)
+TERMOTRON_TCP_IP =  ("172.19.5.240", 8080)  # (ip, port) , (Ronny)
 #############################################################################################
 
