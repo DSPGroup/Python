@@ -4,6 +4,8 @@
 FOLDER_PATH = r"C:\\Users\bar.kristal\Documents\GitHub\Python\Tests\functionality_test"
 FOLDER_NAME = "Log"
 TEST_NAME = "test1"
+
+T32_APP_CMM_PATH = r"T:\\barkristal\DVF101\SPI\scripts\dvf101_app.cmm"
 #################################################################
 
 execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
@@ -37,7 +39,7 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Excel:
 
-# wb1, full_path = create_excel_file(Dir_Name, Excel_Log_Name")
+# wb1, full_path = create_excel_file(DIR_NAME, LOG_NAME_EXCEL)
 # ws1 = wb1.create_sheet("new sheet is the new shit!")
 # ws1.cell(row=1,column=1).value="write something" 
 # wb1.save(full_path)
@@ -48,12 +50,14 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Power Supply:
 
-# pwr_sply = QL355TPPwrSply('GPIB0::29::INSTR',RESOURCE_MANAGER)
+# pwr_sply = QL355TPPwrSply(POWER_SUPLLY_ADDRESS, RESOURCE_MANAGER)
 # print pwr_sply.name
-# pwr_sply.set_volt(1,5)
+# pwr_sply.channel_on('1')
+# pwr_sply.set_volt(1,4.3)
 # pwr_sply.read_current(1)
 # pwr_sply.sense(2,1)
-# pwr_sply.channel_on('1')
+#
+# pwr_sply.set_current_lim(1,1.32)
 # pwr_sply.close()
 
 ########################
@@ -95,10 +99,10 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Blue oven:
 
-# termotron = Termotron3800(TERMOTRON_TCP_IP)
-# termotron.stop_chamber()
-# termotron.set_temp(23)
-# termotron.wait_for_temp(29)
-# print termotron.read_temp()
-# time.sleep(3)
-# termotron.stop_chamber()
+termotron = Termotron3800(TERMOTRON_TCP_IP)
+termotron.stop_chamber()
+termotron.set_temp(23)
+termotron.wait_for_temp(29)
+print termotron.read_temp()
+time.sleep(3)
+termotron.stop_chamber()
