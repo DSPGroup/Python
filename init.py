@@ -44,7 +44,6 @@ FOLDER_DATE = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
 DIR_NAME = os.path.join(FOLDER_PATH , FOLDER_NAME , FOLDER_DATE)
 
 
-
 #########################################
 ##### Log:
 ##### This section creates the log files for every test,
