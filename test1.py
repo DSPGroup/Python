@@ -50,7 +50,7 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Power Supply:
 
-# pwr_sply = QL355TPPwrSply(POWER_SUPLLY_ADDRESS, RESOURCE_MANAGER)
+# pwr_sply = QL355TPPwrSply(POWER_SUPLLY_ADDRESS)
 # print pwr_sply.name
 # pwr_sply.channel_on('1')
 # pwr_sply.set_volt(1,4.3)
@@ -63,7 +63,7 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Frequency counter:
 
-# freq_counter = HP53131aFreqCounter(FREQUENCY_COUNTER_ADDRESS, RESOURCE_MANAGER)
+# freq_counter = HP53131aFreqCounter(FREQUENCY_COUNTER_ADDRESS)
 # print freq_counter.name
 # freq_counter.meas("freqency")
 # a= freq_counter.meas("volt_min_peak")
@@ -73,7 +73,7 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Electronc load:
 
-# load = KikusuiPLZ70UA(ELECTRONIC_LOAD_ADDRESS, RESOURCE_MANAGER)
+# load = KikusuiPLZ70UA(ELECTRONIC_LOAD_ADDRESS)
 # print load.name
 # load.reset()
 # load.load_on()
@@ -95,7 +95,6 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 # fridg.close()
 
 
-
 ########################
 ## Blue oven:
 
@@ -110,8 +109,8 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 
 ########################
 ## DMM
-#
-# dmm = Agillent34401A(DMM_ADDRESS, RESOURCE_MANAGER)
+
+# dmm = Agillent34401A(DMM_ADDRESS)
 # dmm.meas("DCV")
 # dmm.meas("ACV")
 # dmm.meas("frequency")

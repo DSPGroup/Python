@@ -17,7 +17,8 @@ class Error_connecting_device():
 #Lab equipment classes:
 
 class Agillent34401A():
-    def __init__(self,address,resource_manager):
+    def __init__(self,address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
@@ -65,7 +66,8 @@ class Agillent34401A():
 
 
 class QL355TPPwrSply():
-    def __init__(self,address,resource_manager):
+    def __init__(self,address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.dev.clear()
         self.name=self.dev.query('*IDN?')[:-1]
@@ -152,7 +154,8 @@ class QL355TPPwrSply():
                      
      
 class HP53131aFreqCounter():
-    def __init__(self,address,resource_manager):
+    def __init__(self,address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
@@ -226,7 +229,8 @@ class HP53131aFreqCounter():
 
         
 class HP33120aWaveGen():
-    def __init__(self, address, resource_manager):
+    def __init__(self, address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
@@ -296,7 +300,8 @@ class HP33120aWaveGen():
     
 
 class KikusuiPLZ70UA():
-    def __init__(self, address, resource_manager):
+    def __init__(self, address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
