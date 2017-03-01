@@ -247,7 +247,7 @@ class HP33120aWaveGen():
     #Generate a waveform in single command.
     #Example: self.generate("SIN", 3000, 1.5, -1) generates a sine wave, 3KHz, 1.5Vpp, -1V offset.    
     def generate(self, wave, frequency, amplitude, offset):
-        self.dev.write("APPL:%s %s, %s, %s" %(wave, freqency, amplitude, offset))
+        self.dev.write("APPL:%s %s, %s, %s" %(wave, frequency, amplitude, offset))
     
     #Set specifiied shape : SINusoid|SQUare|TRIangle|RAMP|NOISe|DC|USER
     def set_shape(self, shape):
@@ -518,16 +518,21 @@ class Termotron3800():
     def read_temp(self):
         self.sock.send("PVAR1?\r\n") #read the deviation from the configured value
         time.sleep(0.1)
-        current_temp = float(self.read_line())
-        return current_temp
+        current_temp = self.read_line()
+        count = 0
+        while current_temp == '0' and count<3:
+            self.sock.send("PVAR1?\r\n")
+            current_temp = self.read_line()
+            count += 1
+        return float(current_temp)
 
 
     def wait_for_temp(self, temp):
         self.set_temp(temp)
         time.sleep(0.1)
-        current_temp = float(self.read_temp())
+        current_temp = self.read_temp()
         while (abs(current_temp) <= abs(temp*0.98) or abs(current_temp) >= abs(temp*1.02)):
             time.sleep(1)
-            current_temp = float(self.read_temp())
+            current_temp = self.read_temp()
         write_to_log("Temperature has reached the desirable value")
 
