@@ -276,14 +276,15 @@ class Lauterbach():
             rc2 = self.t32api.T32_Attach(T32_DEV)
             rc3 = self.t32api.T32_Ping()
             if (rc2 != T32_OK or rc3 != T32_OK):
-                write_to_log("Error while connecting to debug interface, attampt number {}".format(count))
                 exception_2_raised=1
                 self.close()
+        if count == num_of_attempts:
+            write_to_log("Error- failed to connect to Lautebach after {} attempts".format(count+1))
         # Start PRACTICE script - run dvf101_app.cmm
         self.t32api.T32_Cmd(b"CD.DO {}".format(T32_APP_CMM_PATH))
         time.sleep(2)
-        
-        
+
+
     def close(self):
         self.t32api.T32_Exit()
         
@@ -310,7 +311,7 @@ class Lauterbach():
         if (self.t32api.T32_Cmd(command) != T32_OK):
             write_to_log("error while writing to 0x{}".format(address))
     
-    
+
     #set to 0 only the specified bits
     def clear_bits(self, address, bits_to_clear, length="LONG"):
             command = "PER.Set.Field A:{} %{} 0x{} {}".format(address, length ,str(bits_to_set), '0')
