@@ -37,12 +37,13 @@ import visa         # for controlling GPIB devices. (this module takes long time
 import openpyxl     # Excel library.  (this module takes long time to load, so load it only if necessary)
 import decimal
 import platform     #for the Laurebach initialization
+import PyTektronixScope
+
 
 #Test1 path:
 
 FOLDER_DATE = datetime.datetime.strftime(datetime.datetime.now(), '%Y-%m-%d')
 DIR_NAME = os.path.join(FOLDER_PATH , FOLDER_NAME , FOLDER_DATE)
-
 
 
 #########################################
@@ -64,14 +65,15 @@ open_log(DIR_NAME, LOG_NAME)
 
 
 
-# this variable need to be sent as an argument when defining a new Lab_Equipment device 
-RESOURCE_MANAGER = visa.ResourceManager()
-
 ############################################################################################
 ##### defines: 
 #############
 
+<<<<<<< HEAD
 T32_APP_CMM_PATH = r"C:\T32\DVF101\script_from_lautherbach_support.cmm"
+=======
+T32_APP_CMM_PATH = r"T:\\Barkristal\DVF101\SPI\scripts\dvf101_app.cmm"
+>>>>>>> refs/remotes/origin/master
 
 
 #lab_equipment GPIB addresses:
@@ -79,7 +81,8 @@ POWER_SUPLLY_ADDRESS = "GPIB1::4::INSTR"
 DMM_ADDRESS = "GPIB1::22::INSTR"
 FREQUENCY_COUNTER_ADDRESS = "GPIB0::27::INSTR"
 WAVE_GENERATOR_ADDRESS = "GPIB0::1::INSTR"
-ELECTRONIC_LOAD = "GPIB0::3::INSTR"
+ELECTRONIC_LOAD_ADDRESS = "GPIB0::3::INSTR"
+SCOPE_ADDRESS = "GPIB0::9::INSTR"
 
 #TCP_IP addresses:
 #TERMOTRON_TCP_IP = ("172.19.5.237", 8080)  # (ip, port) , (Sas)
