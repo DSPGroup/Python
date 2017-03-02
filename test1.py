@@ -38,9 +38,9 @@ execfile(r"C:\GitHub\Python\init.py")
 ########################
 ## Excel:
 
-# wb1, full_path = create_excel_file(DIR_NAME, LOG_NAME_EXCEL)
+# wb1, path = create_excel_file(DIR_NAME, LOG_NAME_EXCEL)
 # ws1 = wb1.create_sheet("new sheet is the new shit!")
-# ws1.cell(row=1,column=1).value="write something" 
+# ws1.cell(row=1,column=1).value="write something"
 # wb1.save(full_path)
 # wb=open_excel_file(full_path)
 # print wb.get_sheet_names()
@@ -49,7 +49,7 @@ execfile(r"C:\GitHub\Python\init.py")
 ########################
 ## Power Supply:
 
-# pwr_sply = QL355TPPwrSply(POWER_SUPLLY_ADDRESS, RESOURCE_MANAGER)
+# pwr_sply = QL355TPPwrSply(POWER_SUPLLY_ADDRESS)
 # print pwr_sply.name
 # pwr_sply.channel_on('1')
 # pwr_sply.set_volt(1,4.3)
@@ -62,7 +62,7 @@ execfile(r"C:\GitHub\Python\init.py")
 ########################
 ## Frequency counter:
 
-# freq_counter = HP53131aFreqCounter(FREQUENCY_COUNTER_ADDRESS, RESOURCE_MANAGER)
+# freq_counter = HP53131aFreqCounter(FREQUENCY_COUNTER_ADDRESS)
 # print freq_counter.name
 # freq_counter.meas("freqency")
 # a= freq_counter.meas("volt_min_peak")
@@ -72,7 +72,7 @@ execfile(r"C:\GitHub\Python\init.py")
 ########################
 ## Electronc load:
 
-# load = KikusuiPLZ70UA(ELECTRONIC_LOAD, RESOURCE_MANAGER)
+# load = KikusuiPLZ70UA(ELECTRONIC_LOAD_ADDRESS)
 # print load.name
 # load.reset()
 # load.load_on()
@@ -94,14 +94,31 @@ execfile(r"C:\GitHub\Python\init.py")
 # fridg.close()
 
 
-
 ########################
 ## Blue oven:
 
 # termotron = Termotron3800(TERMOTRON_TCP_IP)
 # termotron.stop_chamber()
 # termotron.set_temp(23)
+<<<<<<< HEAD
 # termotron.wait_for_temp(29)
 # print termotron.read_temp()
 # time.sleep(3)
 # termotron.stop_chamber()
+=======
+# termotron.wait_for_temp(22)
+# write_to_log(termotron.read_temp())
+# time.sleep(1)
+# termotron.stop_chamber()
+
+
+########################
+## DMM
+
+# dmm = Agillent34401A(DMM_ADDRESS)
+# dmm.meas("DCV")
+# dmm.meas("ACV")
+# dmm.meas("frequency")
+# dmm.close()
+
+>>>>>>> refs/remotes/origin/master

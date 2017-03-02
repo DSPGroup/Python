@@ -17,14 +17,15 @@ class Error_connecting_device():
 #Lab equipment classes:
 
 class Agillent34401A():
-    def __init__(self,address,resource_manager):
+    def __init__(self,address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
         
     def close(self):
         self.dev.close()
-        write_to_log ('The connection with: %s is now closed' %(self.name))
+        #write_to_log ('The connection with: %s is now closed' %(self.name))
     
     def send_command(self, command):
     #Send a visa command to the device.
@@ -65,7 +66,8 @@ class Agillent34401A():
 
 
 class QL355TPPwrSply():
-    def __init__(self,address,resource_manager):
+    def __init__(self,address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.dev.clear()
         self.name=self.dev.query('*IDN?')[:-1]
@@ -95,7 +97,7 @@ class QL355TPPwrSply():
         self.dev.write("V%s %s" %(channel , volt))
         time.sleep(0.5)
         res = self.dev.query("V%s?" %(channel))[:-1]
-        write_to_log (res)
+        return res
         
     def set_current_lim(self, channel, current):
         #set the current limit of the specified channel
@@ -103,7 +105,7 @@ class QL355TPPwrSply():
         self.dev.write("I%s %s" %(channel ,current))
         time.sleep(0.1)
         res = self.dev.query("I%s?" %(channel))[:-1]
-        write_to_log(res)
+        return res
         
     def channel_on(self, channel):
         #set ON the specified channel
@@ -122,36 +124,38 @@ class QL355TPPwrSply():
         channel = str(channel)
         self.dev.write('DELTAV%s %s' %(channel ,step_size))
         self.dev.write('INCV%s' %(channel))
-        write_to_log("Channel %s was incremented by %sV" %(channel ,step_size))
-        self.dev.write('V%s?' %(channel))
-        write_to_log("Channel %s volatge is now %sV" %(channel ,self.dev.read()[3:]))
-        
+        #write_to_log("Channel %s was incremented by %sV" %(channel ,step_size))
+        res = self.dev.write('V%s?' %(channel))
+        #write_to_log("Channel %s volatge is now %sV" %(channel ,self.dev.read()[3:]))
+        return res
+
     def all_off(self):
         #set ALL channels OFF
         self.dev.write('OPALL 0')
-        write_to_log("All channels set OFF")
+        #write_to_log("All channels set OFF")
         
     def all_on(self):
         #set ALL channels ON
         self.dev.write('OPALL 1')
-        write_to_log("All channels set ON")
+        #write_to_log("All channels set ON")
 
     def read_current(self, channel):
         #reads the current flows right now through the channel
         self.dev.write('I%sO?' %(str(channel)))
         cur = self.dev.read()[:-1]
-        write_to_log("The current at channel %s is: %s" %(channel, cur))
+        #write_to_log("The current at channel %s is: %s" %(channel, cur))
         return cur
         
     def sense(self, channel, mode):
     #mode=0: local, mode=1: remote
         self.dev.write('SENSE%s %s' %(channel, mode))
         mod="local" if mode == '0' else "remote"
-        write_to_log("Activated %s sense on channel %s" %(mod, str(channel)))
+        #write_to_log("Activated %s sense on channel %s" %(mod, str(channel)))
                      
      
 class HP53131aFreqCounter():
-    def __init__(self,address,resource_manager):
+    def __init__(self,address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
@@ -225,7 +229,8 @@ class HP53131aFreqCounter():
 
         
 class HP33120aWaveGen():
-    def __init__(self, address, resource_manager):
+    def __init__(self, address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
@@ -246,7 +251,7 @@ class HP33120aWaveGen():
     #Generate a waveform in single command.
     #Example: self.generate("SIN", 3000, 1.5, -1) generates a sine wave, 3KHz, 1.5Vpp, -1V offset.    
     def generate(self, wave, frequency, amplitude, offset):
-        self.dev.write("APPL:%s %s, %s, %s" %(wave, freqency, amplitude, offset))
+        self.dev.write("APPL:%s %s, %s, %s" %(wave, frequency, amplitude, offset))
     
     #Set specifiied shape : SINusoid|SQUare|TRIangle|RAMP|NOISe|DC|USER
     def set_shape(self, shape):
@@ -295,7 +300,8 @@ class HP33120aWaveGen():
     
 
 class KikusuiPLZ70UA():
-    def __init__(self, address, resource_manager):
+    def __init__(self, address):
+        resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
         self.name=self.dev.query('*IDN?')[:-1]
         self.dev.timeout = 5000
@@ -459,36 +465,53 @@ class Termotron3800():
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.tcp_ip, self.port))
         self.sock.send("IDEN?\r\n")    #ask for device identity
-        self.name = self.sock.recv(23)
-        self.sock.recv(10)
+        self.name = self.read_line()
         self.sock.send("VRSN?\r\n")    #ask for software version
-        self.version = self.sock.recv(16)
-        self.sock.recv(5)
-        
+        self.version = self.read_line()
+
+
     #close connection with device
     def close(self):
         self.sock.close()
-    
+
+    #read line from socket
+    def read_line(self):
+        line = ""
+        while True:
+            c = self.sock.recv(64)
+            if c == "":
+                break
+            elif "\r" in c:
+                line += c.split("\r")[0]
+                break
+            else:
+                line += c
+        return line
+
     #before reading the device's answer:
     def clear_buffer(self):
-        self.sock.recv(10)
+        c = self.sock.recv(1)
+        while (c != ""):
+            c = self.sock.recv(16)
         time.sleep(0.1)
-        
+
+    #stop chamber from working
     def stop_chamber(self):
         err = "0"
         k = 0
-        while (err != "5" and k<10):  #5 means that Termotron received the stop command
+        while (err != "5" and k<3):  #5 means that Termotron received the stop command
             self.sock.send("STOP\r\n")  #send the STOP command
-            self.clear_buffer()
             self.sock.send("SCOD?\r\n")  #check if the command had been received
-            err = self.sock.recv(1)
-            
+            err = self.read_line()
+            k += 1
+
         if (k == 10): #5 means that Termotron received the stop command
             write_to_log("Error while sending STOP command to %s" %self.name)
             
     def run_chamber(self):
         self.sock.send("RUNM\r\n")
-         
+
+
     def set_temp(self, temp):
         if type(temp != str):
             temp = str(temp)
@@ -498,19 +521,23 @@ class Termotron3800():
         
     #read the current temperature of the chamber.
     def read_temp(self):
-        self.clear_buffer()
         self.sock.send("PVAR1?\r\n") #read the deviation from the configured value
         time.sleep(0.1)
-        current_temp = float(self.sock.recv(4))
-        return current_temp
+        current_temp = self.read_line()
+        count = 0
+        while current_temp == '0' and count<3:
+            self.sock.send("PVAR1?\r\n")
+            current_temp = self.read_line()
+            count += 1
+        return float(current_temp)
 
 
     def wait_for_temp(self, temp):
         self.set_temp(temp)
         time.sleep(0.1)
-        current_temp = float(self.read_temp())
+        current_temp = self.read_temp()
         while (abs(current_temp) <= abs(temp*0.98) or abs(current_temp) >= abs(temp*1.02)):
             time.sleep(1)
-            current_temp = float(self.read_temp())
+            current_temp = self.read_temp()
         write_to_log("Temperature has reached the desirable value")
 
