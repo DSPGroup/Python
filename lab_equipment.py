@@ -229,6 +229,7 @@ class HP53131aFreqCounter():
 
         
 class HP33120aWaveGen():
+    '''Compatible also for Agilent33250A device'''
     def __init__(self, address):
         resource_manager = visa.ResourceManager()
         self.dev=resource_manager.open_resource(address)
@@ -297,7 +298,14 @@ class HP33120aWaveGen():
         result = self.dev.query("VOLT:OFFS?")[:-1]
         write_to_log("Offset is: %s" %(result))
         return result   
-    
+
+    #Turn on the output channel. Doesn't necessary when using the generate() command,
+    #because output channel is being turn on automatically.
+    def output_on(self):
+        self.dev.write("OUTPUT ON")
+
+    def output_off(self):
+        self.dev.write("OUTPUT OFF")
 
 class KikusuiPLZ70UA():
     def __init__(self, address):
