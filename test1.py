@@ -1,18 +1,34 @@
 
-################################################################
+####################################################################################################
+#   This test is an example of how to write a test, and contains a few code lines                  #
+#   for every module.                                                                              #
+#   Notice that every test shoulld contain the next defines:                                       #
+#   #Test ID:                                                                                      #
+#    USER_NAME   - this variable is being used in the init.py file, to choose the right address.   #
+#    FOLDER_PATH - the path for the test's log to be saved.                                        #
+#    TEST_NAME   - the test's name.                                                                #
+#                                                                                                  #
+#   #defines:                                                                                      #
+#    T32_APP_CMM_PATH of every define that is specific to this test.                               #
+#                                                                                                  #
+#   #call the init.py module:                                                                      #
+#    execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")                             #
+####################################################################################################
+
 ## Test ID:
+USER_NAME = 'Bar'
 FOLDER_PATH = r"C:\\Users\bar.kristal\Documents\GitHub\Python\Tests\functionality_test"
-FOLDER_NAME = "Log"
 TEST_NAME = "test1"
 
+#defines:
 T32_APP_CMM_PATH = r"T:\\barkristal\DVF101\SPI\scripts\dvf101_app.cmm"
-#################################################################
 
+#call the init.py module:
 execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
+#######################################################################################
 
 
 
-########################
 ## Uart_Device:
 
 # D6 = UartDevice('DBMD6', 'COM13', baudrate=912600, bytesize=8, parity='N', stopbits=1,timeout=1)
@@ -115,4 +131,11 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 # dmm.meas("ACV")
 # dmm.meas("frequency")
 # dmm.close()
+
+
+########################
+## Wave generator
+
+wave_gen = HP33120aWaveGen("GPIB0::12::INSTR")
+wave_gen.generate("SIN", '1000', "1", "0")
 
