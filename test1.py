@@ -11,7 +11,7 @@
 #   #defines:                                                                                      #
 #    T32_APP_CMM_PATH of every define that is specific to this test.                               #
 #                                                                                                  #
-#   #call the init.py module:                                                                      #
+#   #import modules:                                                                      #
 #    execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")                             #
 ####################################################################################################
 
