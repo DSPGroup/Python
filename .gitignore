@@ -4,3 +4,5 @@ Tests/DCX81/dcx81_spi_test_with_dbmd6.py
 Tests/DCX81/spi_read_fifo.cmm
 Tests/DCX81/spi2_slave.cmm
 *.xlsx
+Tests/apx500_functionality_test/THD_test.approjx
+Tests/apx500_functionality_test/SNR_test.approjx
