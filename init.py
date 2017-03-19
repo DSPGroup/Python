@@ -28,7 +28,7 @@ import psutil
 import visa         # for controlling GPIB devices. (this module takes long time to load, so load it only if necessary)
 import openpyxl     # Excel library.  (this module takes long time to load, so load it only if necessary)
 import decimal
-import platform     #for the Laurebach initialization
+import platform     # for the Laurebach initialization
 import PyTektronixScope
 
 
