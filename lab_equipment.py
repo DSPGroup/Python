@@ -418,10 +418,10 @@ class VotschVT4002():
     
     #Sets the temperature and STARTS the chamber. temp can be from type int, float of str
     def set_temp(self, temp):
-        neg = '0'
         typ = type(temp) 
         if (typ == str):
             temp = float(temp)
+        neg = '0' if int(temp) >= 0 else '-'
         if (abs(temp) < 10):
             temp = neg + '00' + str(round(temp,1))
         elif (temp <= 100 and temp >= -50):   
