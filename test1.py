@@ -9,7 +9,7 @@
 #    TEST_NAME   - the test's name.                                                                #
 #                                                                                                  #
 #   #defines:                                                                                      #
-#    T32_APP_CMM_PATH of every define that is specific to this test.                               #
+#    T32_APP_CMM_PATH or every define that is specific to this test.                               #
 #                                                                                                  #
 #   #import modules:                                                                      #
 #    execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")                             #
