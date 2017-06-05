@@ -11,7 +11,7 @@
 #   #defines:                                                                                      #
 #    T32_APP_CMM_PATH or every define that is specific to this test.                               #
 #                                                                                                  #
-#   #import modules:                                                                      #
+#   #import modules:                                                                               #
 #    execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")                             #
 ####################################################################################################
 
@@ -38,6 +38,13 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 # D6.load_boot_file(r'T:\Barkristal\VT_D6_ver_293_Sen333.bin')
 # print D6.read_IO_port('3000000')
 
+D4 = UartDevice('DBMD4', 'COM9', baudrate=912600, bytesize=8, parity='N', stopbits=1,timeout=1)
+D4.change_baudrate(115200)
+print D4.ser.baudrate
+D4.sync(10)
+# D6.load_boot_file(r'T:\Barkristal\VT_D6_ver_293_Sen333.bin')
+print D4.read_apb_reg('3000000')
+print D4.read_apb_reg('3000008')
 
 
 ########################
@@ -136,6 +143,11 @@ execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 ########################
 ## Wave generator
 
-wave_gen = HP33120aWaveGen("GPIB0::12::INSTR")
-wave_gen.generate("SIN", '1000', "1", "0")
+# wave_gen = HP33120aWaveGen("GPIB0::12::INSTR")
+# wave_gen.generate("SIN", '1000', "1", "0")
 
+
+########################
+## saleae
+# logic = saleae.Saleae()
+# logic.capture_to_file(r'c:\saleae_capture')
