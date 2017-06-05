@@ -7,7 +7,7 @@ TEST_NAME = "excel_test"
 #call the init.py module:
 execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\init.py")
 
-#defines:
+# defines:
 headlines = ["Block", "Temp", "Voltage", "Result"]
 temps = ["-40C", "25C", "80C"]
 voltages = ["0.9", "1.1", "1.2"]
@@ -23,9 +23,10 @@ result_col = 4
 wb1, full_path = create_excel_file(DIR_NAME, LOG_NAME_EXCEL)
 ws1 = wb1.create_sheet("BIST results")
 
-# thermotron = Termotron3800(TERMOTRON_TCP_IP)
-# pwr_sply = QL355TPPwrSply(POWER_SUPLLY_ADDRESS)
-# dmm = Agillent34401A(DMM_ADDRESS)
+thermotron = Termotron3800(TERMOTRON_TCP_IP)
+pwr_sply = QL355TPPwrSply(POWER_SUPLLY_ADDRESS)
+dmm = Agillent34401A(DMM_ADDRESS)
+
 
 
 #write headlines to excel
@@ -38,6 +39,7 @@ current_row = 2
 #start test and write results to excel
 for temp in temps:
     # thermotron.set_temp(temp)
+    time.sleep(3)
 
     for volt in voltages:
         # pwr_sply.set_volt(volt)
