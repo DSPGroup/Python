@@ -30,7 +30,7 @@ import openpyxl     # Excel library.  (this module takes long time to load, so l
 import decimal
 import platform     # for the Laurebach initialization
 import PyTektronixScope
-
+import saleae
 
 
 
@@ -45,6 +45,7 @@ if USER_NAME == "Bar":
     execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\devices.py")
     execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\utilities.py")
     execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\lab_equipment.py")
+    # execfile(r"C:\Users\bar.kristal\Documents\GitHub\Python\apx525_module.py")
 
     POWER_SUPLLY_ADDRESS = "GPIB0::29::INSTR"
     DMM_ADDRESS = "GPIB0::22::INSTR"
@@ -52,7 +53,7 @@ if USER_NAME == "Bar":
     WAVE_GENERATOR_ADDRESS = "GPIB0::1::INSTR"
     ELECTRONIC_LOAD_ADDRESS = "GPIB0::3::INSTR"
     SCOPE_ADDRESS = "GPIB0::9::INSTR"
-
+    OVEN_ADDRESS = 'COM17'
 
 elif USER_NAME == "Sas":
     execfile(r"C:\GitHub\Python\devices.py")
