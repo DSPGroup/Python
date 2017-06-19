@@ -720,7 +720,13 @@ class RaspberryPi():
 		if check != "check\r\n":
 			write_to_log("Error: failed to open an ssh conncetion with the RaspberryPi")
 			self.close
-
+		# go to DBMA7_valab directory
+		self.send("cd ../DBMA7_valab")
+		# reset d2 and a7, init d2:
+		self.send("sudo python host_valab.py atc3 reset")
+		self.send("sudo python host_valab.py d2 reset")
+		self.send("sudo python host_valab.py init_d2")
+		time.sleep(1)
 
 	def send(self, command):
 		'''send command to the RaspberryPi's terminal, and returns the answer'''
@@ -734,12 +740,30 @@ class RaspberryPi():
 	def read(self):
 		'''reads the answer from the RaspberryPi's terminal'''
 		if (not self.channel.recv_ready()):
-			return
+			time.sleep(1)
+			if (not self.channel.recv_ready()):
+				return
 		answer = self.channel.recv(8192)
 		while (self.channel.recv_ready()):
 			answer += self.channel.recv(8192)
 		answer = answer.rsplit("{}@raspberry".format(self.user_name))[0]
 		return answer
+
+	def read_register_D2(self, address):
+		answer = RPI.send("sudo python host_valab.py d2 r {}".format(address))
+		answer = answer.split("value: ")[1].lstrip("0x").rstrip('\r\n')
+		return answer
+
+	def write_register_D2(self, address, value):
+		RPI.send("sudo python host_valab.py d2 w {} {}".format(address, value))
+
+	def read_register_A7(self, address):
+		answer = RPI.send("sudo python host_valab.py atc3 r {}".format(address))
+		answer = answer.split("value: ")[1].lstrip("0x").rstrip('\r\n')
+		return answer
+
+	def write_register_A7(self, address, value):
+		RPI.send("sudo python host_valab.py atc3 w {} {}".format(address, value))
 
 	def close(self):
 		'''close connection with the RaspberryPi'''
