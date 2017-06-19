@@ -699,3 +699,51 @@ class UartDeviceD7FPGA(UartDevice):
 			if input != 'Unknowncommand':
 				flag = 1
 		return input
+
+
+class RaspberryPi():
+	def __init__(self, ip_address, user_name, user_password ):
+		self.ip_address = ip_address
+		self.user_name = user_name
+		self.user_password = user_password
+		# open an ssh connection:
+		self.ssh = paramiko.SSHClient()
+		self.ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
+		self.ssh.connect(self.ip_address, username=self.user_name, password=self.user_password, allow_agent=False)
+		# open a channel:
+		self.channel = self.ssh.invoke_shell()
+		self.channel.settimeout(3)
+		# check connection:
+		time.sleep(0.5)
+		self.read()
+		check = self.send("echo check")
+		if check != "check\r\n":
+			write_to_log("Error: failed to open an ssh conncetion with the RaspberryPi")
+			self.close
+
+
+	def send(self, command):
+		'''send command to the RaspberryPi's terminal, and returns the answer'''
+		self.channel.sendall(command + '\n')
+		time.sleep(0.1)
+		while (not self.channel.recv_ready()):
+			pass
+		self.channel.recv(len(command+'\n')+1) #ignore the echo of the command itself
+		return self.read()
+
+	def read(self):
+		'''reads the answer from the RaspberryPi's terminal'''
+		if (not self.channel.recv_ready()):
+			return
+		answer = self.channel.recv(8192)
+		while (self.channel.recv_ready()):
+			answer += self.channel.recv(8192)
+		answer = answer.rsplit("{}@raspberry".format(self.user_name))[0]
+		return answer
+
+	def close(self):
+		'''close connection with the RaspberryPi'''
+		self.channel.close()
+		self.ssh.close()
+
+
