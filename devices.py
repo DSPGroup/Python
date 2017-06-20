@@ -729,6 +729,8 @@ class RaspberryPi():
 		time.sleep(1)
 
 	def send(self, command):
+		while (self.channel.recv_ready()):
+			self.channel.recv(8192)
 		'''send command to the RaspberryPi's terminal, and returns the answer'''
 		self.channel.sendall(command + '\n')
 		time.sleep(0.1)
