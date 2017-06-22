@@ -729,9 +729,11 @@ class RaspberryPi():
 		time.sleep(1)
 
 	def send(self, command):
-		while (self.channel.recv_ready()):
-			self.channel.recv(8192)
 		'''send command to the RaspberryPi's terminal, and returns the answer'''
+		# while (self.channel.recv_ready()):
+		# 	self.channel.recv(8192)
+		while (not self.channel.send_ready()):
+			pass
 		self.channel.sendall(command + '\n')
 		time.sleep(0.1)
 		while (not self.channel.recv_ready()):
@@ -739,7 +741,7 @@ class RaspberryPi():
 		self.channel.recv(len(command+'\n')+1) #ignore the echo of the command itself
 		return self.read()
 
-	def read(self):
+	def read_old(self):
 		'''reads the answer from the RaspberryPi's terminal'''
 		if (not self.channel.recv_ready()):
 			time.sleep(1)
@@ -748,8 +750,21 @@ class RaspberryPi():
 		answer = self.channel.recv(8192)
 		while (self.channel.recv_ready()):
 			answer += self.channel.recv(8192)
+		# answer = answer.rsplit("{}@raspberry".format(self.user_name))[0]
+		return answer
+
+	def read(self):
+		'''reads the answer from the RaspberryPi's terminal'''
+		if (not self.channel.recv_ready()):
+			time.sleep(1)
+			if (not self.channel.recv_ready()):
+				return
+		answer = self.channel.recv(8192)
+		while (not "{}@raspberry".format(self.user_name) in answer):
+			answer += self.channel.recv(8192)
 		answer = answer.rsplit("{}@raspberry".format(self.user_name))[0]
 		return answer
+
 
 	def read_register_D2(self, address):
 		answer = RPI.send("sudo python host_valab.py d2 r {}".format(address))
