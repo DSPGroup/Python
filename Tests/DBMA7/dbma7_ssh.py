@@ -20,10 +20,14 @@ rpi_password = "Validation23"
 
 
 RPI = RaspberryPi(rpi_address, rpi_username, rpi_password)
-# print RPI.send("sudo python host_valab.py atc3 r 0x0")
+
 
 print RPI.read_register_A7('0x0')
 RPI.write_register_A7('0x0', '0x0004')
 print RPI.read_register_A7('0x0')
+
+print RPI.send("sudo python host_valab.py det_internal")
+print RPI.send("sudo python host_valab.py atc3 reset")
+print RPI.send("sudo python host_valab.py det_internal")
 
 RPI.close()
