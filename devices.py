@@ -722,11 +722,7 @@ class RaspberryPi():
 			self.close
 		# go to DBMA7_valab directory
 		self.send("cd ../DBMA7_valab")
-		# reset d2 and a7, init d2:
-		self.send("sudo python host_valab.py atc3 reset")
-		self.send("sudo python host_valab.py d2 reset")
-		self.send("sudo python host_valab.py init_d2")
-		time.sleep(1)
+
 
 	def send(self, command):
 		'''send command to the RaspberryPi's terminal, and returns the answer'''
@@ -765,6 +761,15 @@ class RaspberryPi():
 		answer = answer.rsplit("{}@raspberry".format(self.user_name))[0]
 		return answer
 
+	def reset_A7(self):
+		self.send("sudo python host_valab.py atc3 reset")
+
+	def reset_D2(self):
+		self.send("sudo python host_valab.py d2 reset")
+
+	def init_D2(self):
+		self.send("sudo python host_valab.py init_d2")
+		time.sleep(1)
 
 	def read_register_D2(self, address):
 		answer = RPI.send("sudo python host_valab.py d2 r {}".format(address))
@@ -781,6 +786,7 @@ class RaspberryPi():
 
 	def write_register_A7(self, address, value):
 		RPI.send("sudo python host_valab.py atc3 w {} {}".format(address, value))
+
 
 	def close(self):
 		'''close connection with the RaspberryPi'''
