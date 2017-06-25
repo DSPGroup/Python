@@ -29,8 +29,8 @@ import visa         # for controlling GPIB devices. (this module takes long time
 import openpyxl     # Excel library.  (this module takes long time to load, so load it only if necessary)
 import decimal
 import platform     # for the Laurebach initialization
-import PyTektronixScope
-import saleae
+# import PyTektronixScope
+# import saleae
 
 
 
@@ -83,7 +83,18 @@ elif USER_NAME == "Bisset":
     SCOPE_ADDRESS = "GPIB0::9::INSTR"
     TERMOTRON_TCP_IP = ("172.19.5.239", 8080)  # (ip, port) , (Bisset)
 
+elif USER_NAME == "Ronny":
+    execfile(r"C:\Users\ronnyi\Documents\GitHub\Python\devices.py")
+    execfile(r"C:\Users\ronnyi\Documents\GitHub\Python\utilities.py")
+    execfile(r"C:\Users\ronnyi\Documents\GitHub\Python\lab_equipment.py")
 
+    # POWER_SUPLLY_ADDRESS = "GPIB1::29::INSTR"
+    # DMM_ADDRESS = "GPIB0::22::INSTR"
+    # FREQUENCY_COUNTER_ADDRESS = "GPIB0::27::INSTR"
+    # WAVE_GENERATOR_ADDRESS = "GPIB0::1::INSTR"
+    # ELECTRONIC_LOAD_ADDRESS = "GPIB0::3::INSTR"
+    # SCOPE_ADDRESS = "GPIB0::9::INSTR"
+    TERMOTRON_TCP_IP = ("172.19.5.240", 8080)  # (ip, port) , (Ronny)
 
 
 
